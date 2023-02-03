@@ -1,0 +1,180 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+.body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    background-color: #5f5f5f;
+}
+
+/*nav bar*/
+.profileNav{
+    cursor: pointer;
+    font-weight: 600;
+  
+}
+
+.profileNav:hover , .home:hover{
+    border-bottom: 3px solid orange;
+}
+
+#fe{
+    color: orange;
+}
+
+#fe:hover{
+    border-bottom: 3px solid #ffff;
+}
+
+
+
+.home{
+    font-weight: 600;
+}
+
+/* comment*/
+.comment{
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.comment:hover{
+    color: #658864;
+    border-bottom: 3px solid olivedrab;
+}
+.username-welcome {
+    color: orange;
+}
+
+#success-alert {
+    padding-top: 50px;
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    width: 85%;
+
+}
+#add-btn {
+    z-index: 99999;
+    position: fixed;
+    bottom: 5%;
+    right: 1%;
+    cursor: pointer;
+    font-size: 60px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+
+.content {
+    width: 100%;
+    height: 100px;
+    border-color: gray;
+    resize: none;
+    border-radius: 5px;
+}
+
+#nav-username{
+font-weight: 600;
+   color: #73757a;
+}
+
+.nav-username{
+    font-weight: bolder;
+    color: orange;
+}
+
+
+.usernameComment{
+    color: #658864;
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.bodyComment{
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.usernamePostdetails{
+    color:orange;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+
+.userPost{
+    text-align: center;
+}
+
+
+.userPost  span{
+  color: #A6BB8D;
+  font-weight: 900;
+}
+/*Loader styles*/
+.loaderDiv {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(86, 84, 84, 0.498);
+    position: fixed;
+    border-radius: 50%;
+    margin: auto auto;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    display: flex;
+    z-index: 9999;
+}
+
+.lds-hourglass {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-hourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: black transparent orange transparent;
+    animation: lds-hourglass 1.2s infinite;
+}
+
+@keyframes lds-hourglass {
+    0% {
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    50% {
+        transform: rotate(900deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
+}
+
+
+
+
