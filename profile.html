@@ -2,27 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <!--Import Bootstrap && Script-->
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
-    <title>FE Social</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <!--Import Bootstrap && Script-->
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <title>FE Social</title>
 </head>
-
 <body class="body">
-    <!--Loader start-->
-    <div id="loader" class="loaderDiv">
-        <div class="lds-hourglass"></div>
-    </div>
-    <!--Loader end-->
-    <!--MODALS-->
-   <!--Login modal-->
-   <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--Loader start-->
+  <div id="loader" class="loaderDiv">
+    <div class="lds-hourglass"></div>
+  </div>
+  <!--Loader end-->
+  <!--MODALS-->
+  <!--Login modal-->
+  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -88,8 +87,8 @@
       </div>
     </div>
   </div>
-   <!--Create post modal-->
-   <div class="modal fade" id="createPost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--Create post modal-->
+  <div class="modal fade" id="createPost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -128,138 +127,135 @@
       </div>
     </div>
   </div>
-    <!--Delete post modal-->
-    <div class="modal fade" id="deletePost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="postModalTitle">
-                Delete The Post <i class="bi bi-trash3-fill"></i>
-                <span id="delete-Post-Title"></span>
-              </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete the post?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                Close
+  <!--Delete post modal-->
+  <div class="modal fade" id="deletePost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="postModalTitle">
+            Delete The Post <i class="bi bi-trash3-fill"></i>
+            <span id="delete-Post-Title"></span>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete the post?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <input type="hidden" id="delete-post-id-input" value="" />
+          <button id="post-modal-submit-btn" type="button" class="btn btn-danger" onclick="confirmPostdelete()">
+            Yes, Delete <i class="bi bi-trash3-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Add btn post-->
+  <div id="add-btn" class="btn btn-primary" onclick="addBtn()">+</div>
+  <!--Alerts-->
+  <div id="success-alert" class="show fade"></div>
+  <!--Navigation bar container-->
+  <div class="container pt-2">
+    <div class="d-flex justify-content-center">
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand " id="fe" href="index.html">FE Social</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item home">
+                <a class="nav-link active text-white" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item profileNav">
+                <a class="nav-link text-white" onclick="profilePage()">Profile</a>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-end w-100" id="logged-in-div">
+              <button id="login-btn" type="button" class="btn btn-outline-info mx-2" data-bs-toggle="modal"
+                data-bs-target="#login-modal">
+                LogIn
               </button>
-              <input type="hidden" id="delete-post-id-input" value="" />
-              <button id="post-modal-submit-btn" type="button" class="btn btn-danger" onclick="confirmPostdelete()">
-                Yes, Delete <i class="bi bi-trash3-fill"></i>
+              <button type="button" class="btn btn-outline-success" id="register-btn" data-bs-toggle="modal"
+                data-bs-target="#register-modal">
+                Register
+              </button>
+            </div>
+
+            <div class="d-flex w-100 justify-content-end align-items-center" id="logout-div">
+              <img id="nav-user-image" src="./img/user.png" class="rounded-circle" style="width: 40px; height: 40px"
+                alt="" />
+              <b class="text-white px-2" id="nav-username"> @Abdulaziz </b>
+              <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2"
+                data-bs-toggle="modal">
+                Logout <i class="bi bi-box-arrow-right"></i>
               </button>
             </div>
           </div>
         </div>
-      </div>
-      <!--Add btn post-->
-      <div id="add-btn" class="btn btn-primary" onclick="addBtn()">+</div>
-    <!--Alerts-->
-    <div id="success-alert" class="show fade"></div>
-    <!--Navigation bar container-->
-    <div class="container pt-2">
-        <div class="d-flex justify-content-center">
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-                <div class="container-fluid">
-                    <a class="navbar-brand" id="fe" href="index.html">FE Social</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item home">
-                                <a class="nav-link active text-primary" aria-current="page" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item profileNav">
-                                <a class="nav-link text-info" onclick="profilePage()">Profile</a>
-                            </li>
-                        </ul>
-                        <div class="d-flex justify-content-end w-100" id="logged-in-div">
-                            <button id="login-btn" type="button" class="btn btn-outline-info mx-2"
-                                data-bs-toggle="modal" data-bs-target="#login-modal">
-                                LogIn
-                            </button>
-                            <button type="button" class="btn btn-outline-success" id="register-btn"
-                                data-bs-toggle="modal" data-bs-target="#register-modal">
-                                Register
-                            </button>
-                        </div>
-
-                        <div class="d-flex w-100 justify-content-end align-items-center" id="logout-div">
-                            <img id="nav-user-image" src="./img/user.png" class="rounded-circle" style="width: 40px; height: 40px"
-                            alt="" />
-                            <b class="text-white px-2" id="nav-username"> @Abdulaziz </b>
-                            <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2"
-                data-bs-toggle="modal">
-                Logout <i class="bi bi-box-arrow-right"></i>
-              </button>
-                        </div>
-                    </div>
+      </nav>
+    </div>
+    <!--Main content-->
+    <div class="container">
+      <h1 class="userProfile pt-5 text-center"><span id="user-profile"></span> Profile</h1>
+      <div class="d-flex justify-content-center">
+        <div class="col-9">
+          <!--Main Info-->
+          <div class="card show bg-secondary shadow">
+            <div class="card-body">
+              <div class="row">
+                <!--User image column-->
+                <div class="col-2 imageProfile text-white">
+                  <i class="bi bi-person"></i>
+                  <!-- <img  id="main-info-image" src="" alt="Profile image" /> -->
                 </div>
-            </nav>
-        </div>
-        <!--Main content-->
-        <div class="container">
-            <h1 class="userProfile pt-5 text-center"><span id="user-profile"></span> Profile</h1>
-            <div class="d-flex justify-content-center">
-                <div class="col-9">
-                    <!--Main Info-->
-                    <div class="card show">
-                        <div class="card-body">
-                            <div class="row">
-                                <!--User image column-->
-                              
-                                <div class="col-2 imageProfile">
-                                    <i class="bi bi-person"></i>
-                                    <!-- <img  id="main-info-image" src=""
-                                        alt="Profile image" /> -->
-                                </div>
-                                <!--username - email - name -->
+                <!--username - email - name -->
 
-                                <div id="main-info" class="col-4 d-flex flex-column justify-content-evenly "
-                                    style="font-weight: 600">
-                                    <!-- <div class="user-main-info" id="main-info-email">
+                <div id="main-info" class="col-4 d-flex flex-column justify-content-evenly " style="font-weight: 600">
+                  <!-- <div class="user-main-info" id="main-info-email">
                                         abood@gmail.com
                                     </div> -->
-                                    <!-- <div class="user-main-info" id="main-info-name">
+                  <!-- <div class="user-main-info" id="main-info-name">
                                         Abdulaziz
                                     </div> -->
-                                    <div class="user-main-info" id="main-info-username">
-                                        abood1998
-                                    </div>
-                                </div>
-                                <!--Post $ Comments Count-->
-                                <div class="col-4 d-flex flex-column justify-content-evenly " >
-                                    <div class="number-info">
-                                        <span id="posts-count">12</span> Posts
-                                    </div>
-                                    <div class="number-info">
-                                        <span id="comments-count">25</span> Comments
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                    <!--Main Info-->
-                    <!--Posts Title-->
-                    <div class="row mt-5 namePosts">
-                        <h1><span id="name-posts"></span> Posts</h1>
-                    </div>
-                    <!--Posts Title-->
-                    <!--Posts-->
-                    <div class="d-flex justify-content-center">
-                        <div class="col-12 mt-5">
-                            <div id="user-posts"></div>
-                        </div>
-                    </div>
+                  <div class="user-main-info text-white" id="main-info-username">
+                    abood1998
+                  </div>
                 </div>
+                <!--Post $ Comments Count-->
+                <div class="col-4 d-flex flex-column justify-content-evenly ">
+                  <div class="number-info text-info">
+                    <span id="posts-count">12</span> Posts
+                  </div>
+                  <div class="number-info text-info">
+                    <span id="comments-count">25</span> Comments
+                  </div>
+                </div>
+              </div>
+
             </div>
+          </div>
+          <!--Main Info-->
+          <!--Posts Title-->
+          <div class="row mt-5 namePosts ">
+            <h1><span id="name-posts"></span> Posts</h1>
+          </div>
+          <!--Posts Title-->
+          <!--Posts-->
+          <div class="d-flex justify-content-center">
+            <div class="col-12 mt-5">
+              <div id="user-posts"></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </body>
 
 <script src="main.js"></script>

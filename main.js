@@ -63,7 +63,6 @@ function getPosts() {
   axios.get(`${basUrl}/posts`).then((response) => {
     console.log("data", response.data);
     toggleLoader(false);
-
     const posts = response.data;
     for (post of posts) {
       const author = post.author;
@@ -92,32 +91,29 @@ function getPosts() {
 
       let content = `
        <!--Post-->
-          <div class="card shadow styleCard mt-2">
+ 
+          <div class="card shadow bg-dark styleCard mt-2">
             <div class="card-header" >
-         <span  style ="cursor:pointer" onclick="userCliked(${author.id})">
-         <b class="usernamePostdetails"> <i class="bi bi-person-circle"></i>  ${author.userName} </b>
+         <span class="userstartpage" onclick="userCliked(${author.id})">
+         <b class="text-warning"> <i class="bi bi-person-circle"></i>  ${author.userName} </b>
          </span>
          ${editButton}
-    
             <div class="card-body" >
-           
               <h6 style="color: rgb(141, 139, 139)" class="mt-1">
               🗓️  ${post.created}
               </h6>
-              <h5>${postTitle}</h5>
-  
-              <p>
+              <h5 class="text-white">${postTitle}</h5>
+              <p class="text-white">
                ${post.content}
               </p>
               <hr />
-              <span  class="comment" onclick="getCurrentPost(${post.id})">
-              
-              <i class="bi bi-pen-fill"></i> Comment (${post.count})
+              <span class="comment text-secondary" onclick="getCurrentPost(${post.id})">
+             <b> <i class="bi bi-pen-fill"></i> Comment (${post.count})</b>
               </span>
-
             </div>
-         
-          </div>
+            </div>
+          
+        
        `;
 
       document.getElementById("posts").innerHTML += content;
@@ -130,20 +126,18 @@ function userCliked(authorId) {
   window.location.href = `profile.html?authorId=${authorId}`;
 }
 function getUser() {
-  axios.get(`${basUrl}/Auth/${username.id}`).then((response) => {
+  const id = getCurrenUser();
+  axios.get(`${basUrl}/Auth/${id}`).then((response) => {
     console.log("user info", response.data);
-    console.log(response.data[0].countComment);
-    const user = response.data.find((x) => x.id);
+  
+    const user = response.data[0];
     // document.getElementById("user-profile").innerHTML = user.username;
-
-
-    document.getElementById("user-profile").innerHTML = user.userName + "'s" 
+    document.getElementById("user-profile").innerHTML = user.userName + "'s";
     document.getElementById("main-info-username").innerHTML = user.userName;
     document.getElementById("posts-count").innerHTML = user.countPost;
     document.getElementById("comments-count").innerHTML = user.countComment;
     document.getElementById("name-posts").innerHTML = user.userName + "'s";
     const post = response.data.find((x) => x.id).post;
-    console.log("comment", post.comment);
 
     document.getElementById("user-posts").innerHTML = "";
     for (posts of post) {
@@ -160,11 +154,10 @@ function getUser() {
         <button class="btn btn-danger" id="deleteBtn" onclick="deletePost('${encodeURIComponent(
           JSON.stringify(posts)
         )}')" style="float:right; margin-left:5px;"><i class="bi bi-trash-fill"></i></button>
-  
         <button class="btn btn-secondary" id="editBtn" onclick="editPost('${encodeURIComponent(
           JSON.stringify(posts)
         )}')" style="float:right;"><i class="bi bi-pen"></i></button>
- `;
+    `;
       }
       if (posts.title != null) {
         postTitle = posts.title;
@@ -172,28 +165,24 @@ function getUser() {
 
       let content = `
        <!--Post-->
-          <div class="card shadow styleCard mb-2">
-            <div class="card-header" >
-             
-           <span>
-           <b class = "username_"><i class="bi bi-person-circle"></i> ${posts.userName}</b>
-           ${editButton}
+          <div class="card shadow bg-dark mb-2">
+            <div class="card-header">  
+           <span class="userstartpage" >
+           <b class = "text-warning"><i class="bi bi-person-circle"></i> ${posts.userName}</b>
            </span>
-         
-            <div class="card-body" onclick="getCurrentPost(${post.id})">
-            
+           ${editButton}
+            <div class="card-body" onclick="getCurrentPost(${posts.id})">
               <h6 style="color: rgb(141, 139, 139)" class="mt-1">
                ${posts.created}
               </h6>
-              <h5>${postTitle}</h5>
-              <p>
+              <h5 class="text-white">${postTitle}</h5>
+              <p class="text-white">
                ${posts.content}
               </p>
               <hr />
-<div id ="comment">
-Comment's (${posts.count})
-</div>
-            
+              <span  class="comment text-secondary" onclick="getCurrentPost(${posts.id})">
+              <b><i class="bi bi-pen-fill"></i> Comment's (${posts.comment.length})</b>
+              </span>
             </div>
           </div>
        `;
@@ -205,8 +194,7 @@ Comment's (${posts.count})
 //get curren profile page
 function profilePage() {
   const user = getCurrentUser();
-  const userId = user.id;
-  window.location.href = `profile.html?userid=${userId}`;
+  window.location.href = `profile.html?authorId=${user.id}`;
 }
 
 //get current user
@@ -220,86 +208,93 @@ function getCurrentUser() {
   return name;
 }
 
-function getAllPostsForUser() {
-  toggleLoader(true);
-  //get all posts
-
-  axios.get(`${basUrl}/Auth/${username.id}`).then((response) => {
-    toggleLoader(false);
-    const posts = response.data.data;
-    document.getElementById("user-posts").innerHTML = "";
-    for (post of posts) {
-      const author = post.author;
-      let postTitle = "";
-      //show or hide (edit) button
-      //Chcek if user is logged in or not
-      let user = getCurrentUser();
-      let isMyPost = user != null && post.author.id == user.id;
-      let editButton = ``;
-
-      if (isMyPost) {
-        editButton = `
-          <button class="btn btn-danger" id="deleteBtn" onclick="deletePost('${encodeURIComponent(
-            JSON.stringify(post)
-          )}')" style="float:right; margin-left:5px;">Delete <i class="bi bi-trash-fill"></i></button>
-    
-          <button class="btn btn-secondary" id="editBtn" onclick="editPost('${encodeURIComponent(
-            JSON.stringify(post)
-          )}')" style="float:right;">Edit <i class="bi bi-pen"></i></button>
-   `;
-      }
-      if (post.title != null) {
-        postTitle = post.title;
-      }
-
-      let content = `
-         <!--Post-->
-            <div class="card shadow styleCard">
-              <div class="card-header" >
-                <img
-                  src="${author.profile_image}"
-                  alt=""
-                  class="rounded-circle border border-1"
-                  style="width: 50px"
-                />
-             
-                <b class = "username_">${author.username}</b>
-                <div class="edit-del">
-                ${editButton}
-                </div>
-             
-              <div class="card-body" onclick="getCurrentPost(${post.id})">
-                <img
-                  src="${post.image}"
-                  class="w-100"
-                  alt=""
-                />
-                <h6 style="color: rgb(141, 139, 139)" class="mt-1">
-                 ${post.created_at}
-                </h6>
-                <h5>${postTitle}</h5>
-                <p>
-                 ${post.body}
-                </p>
-                <hr />
-                <span> <i class="bi bi-pen-fill"></i> (${post.comments_count}) Comments  <span id = "post-tag-${post.id}"></span></span>
-              </div>
-            </div>
-         `;
-      document.getElementById("user-posts").innerHTML += content;
-      const currentPostTagsId = `post-tag-${post.id}`;
-      document.getElementById(currentPostTagsId).innerHTML = "";
-
-      for (tag of post.tags) {
-        console.log(tag.name);
-        let tagsContent = `
-              <button class = "btn btn-sm rounded-5 tag">${tag.name}</button> 
-              `;
-        document.getElementById(currentPostTagsId).innerHTML += tagsContent;
-      }
-    }
-  });
+function getCurrenUser() {
+  //get the curren user with id
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get("authorId");
+  return id;
 }
+
+// function getAllPostsForUser() {
+//   toggleLoader(true);
+//   //get all posts
+//   axios.get(`${basUrl}/Auth/${username.id}`).then((response) => {
+//     toggleLoader(false);
+//     const posts = response.data.data;
+//     console.log("user post " ,response.data.data);
+//     document.getElementById("user-posts").innerHTML = "";
+//     for (post of posts) {
+//       const author = post.author;
+//       let postTitle = "";
+//       //show or hide (edit) button
+//       //Chcek if user is logged in or not
+//       let user = getCurrentUser();
+//       let isMyPost = user != null && post.author.id == user.id;
+//       let editButton = ``;
+
+//       if (isMyPost) {
+//         editButton = `
+//           <button class="btn btn-danger" id="deleteBtn" onclick="deletePost('${encodeURIComponent(
+//             JSON.stringify(post)
+//           )}')" style="float:right; margin-left:5px;">Delete <i class="bi bi-trash-fill"></i></button>
+
+//           <button class="btn btn-secondary" id="editBtn" onclick="editPost('${encodeURIComponent(
+//             JSON.stringify(post)
+//           )}')" style="float:right;">Edit <i class="bi bi-pen"></i></button>
+//    `;
+//       }
+//       if (post.title != null) {
+//         postTitle = post.title;
+//       }
+
+//       let content = `
+//          <!--Post-->
+//             <div class="card shadow styleCard">
+//               <div class="card-header" >
+//                 <img
+//                   src="${author.profile_image}"
+//                   alt=""
+//                   class="rounded-circle border border-1"
+//                   style="width: 50px"
+//                 />
+
+//                 <b class = "username_">${author.username}</b>
+//                 <div class="edit-del">
+//                 ${editButton}
+//                 </div>
+
+//               <div class="card-body" onclick="getCurrentPost(${post.id})">
+//                 <img
+//                   src="${post.image}"
+//                   class="w-100"
+//                   alt=""
+//                 />
+//                 <h6 style="color: rgb(141, 139, 139)" class="mt-1">
+//                  ${post.created_at}
+//                 </h6>
+//                 <h5>${postTitle}</h5>
+//                 <p>
+//                  ${post.body}
+//                 </p>
+//                 <hr />
+//                 <span> <i class="bi bi-pen-fill"></i> (${post.comments_count}) Comments  <span id = "post-tag-${post.id}"></span></span>
+//               </div>
+//             </div>
+//          `;
+//       document.getElementById("user-posts").innerHTML += content;
+//       const currentPostTagsId = `post-tag-${post.id}`;
+//       document.getElementById(currentPostTagsId).innerHTML = "";
+
+//       for (tag of post.tags) {
+//         console.log(tag.name);
+//         let tagsContent = `
+//               <button class = "btn btn-sm rounded-5 tag">${tag.name}</button>
+//               `;
+//         document.getElementById(currentPostTagsId).innerHTML += tagsContent;
+//       }
+//     }
+//   });
+// }
 //profile.js end
 
 //Alert
@@ -443,7 +438,7 @@ function createNewPostBtn() {
         toggleLoader(true);
         showAlert("New post has been created", "primary");
         setTimeout(() => {
-          window.location = "index.html";
+          window.location.reload();
         }, "1000");
       })
       .catch((error) => {
@@ -564,7 +559,7 @@ function getPost() {
       commentsContent += `<div class="p-3">
       <b class="usernameComment">   <i class="bi bi-person-badge"></i> ${comments.userName}</b>
  
-      <div class="bodyComment">
+      <div class="bodyComment text-white">
       ${comments.commentBody}
       </div>
 </div>
@@ -585,19 +580,20 @@ function getPost() {
     }
 
     const postContent = `
-        <div class="card shadow styleCard mt-4 mb-4">
+        <div class="card shadow bg-dark mt-4 mb-4">
                <div class="card-header">
               <span class="usernamePostdetails"> <i class="bi bi-person-circle"></i>  ${post.author.userName}</span>
                ${editButton}
                </div>
+              
                <div class="card-body">
                  <h6 style="color: rgb(141, 139, 139)" class="mt-1">
                  ${post.created}
                  </h6>
-                 <h5> ${postTitle}</h5>
-                 <p> ${post.content}</p>
-                 <hr />
-                 <span> <i class="bi bi-pen-fill"></i>  Comments</span>
+                 <h5 class="text-white"> ${postTitle}</h5>
+                 <p class="text-white"> ${post.content}</p>
+                 <hr class="text-white" />
+                 <span class="text-info "> <i class="bi bi-pen-fill"></i>  Comments</span>
                </div>
         
              <div>
@@ -606,7 +602,7 @@ function getPost() {
           
            </div>
            
-           <div class="input-group mt-2" id="add-comment">
+           <div class="input-group mt-2 " id="add-comment">
           <input id="comment-input" type="text"  placeholder="Add your comment here..." class="form-control"  />
            <input  type="hidden" id="authorId" value="${username.id}"   />
           <input  type="hidden" id="postid" value="${id}"   />
