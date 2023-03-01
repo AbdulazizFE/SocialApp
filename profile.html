@@ -22,9 +22,9 @@
   <!--Loader end-->
   <!--MODALS-->
   <!--Login modal-->
-  <div class="modal fade mt-5" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+  <div class="modal fade mt-5 " id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content ">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Sign In</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -53,7 +53,7 @@
     </div>
   </div>
   <!--Register new user modal-->
-  <div class="modal fade mt-5" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5 " id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -205,43 +205,66 @@
       </nav>
     </div>
     <!--Main content-->
-    <div class="container  mt-5 pt-5">
+    <div class="container">
       <h1 class="userProfile  text-center"><span id="user-profile"></span> Profile</h1>
       <div class="d-flex justify-content-center">
         <div class="col-9">
           <!--Main Info-->
-          <div class="card  show bg-secondary shadow">
-            <div class="card-body">
-              <div class="row">
-                <!--User image column-->
-                <div class="col-2 imageProfile text-white">
-                  <i class="bi bi-person"></i>
-                  <!-- <img  id="main-info-image" src="" alt="Profile image" /> -->
-                </div>
-                <!--username - email - name -->
+          <div class="container d-flex justify-content-center align-items-center">
+             
+            <div class="cardUser">
 
-                <div id="main-info" class="col-4 d-flex flex-column justify-content-evenly " style="font-weight: 600">
-                  <!-- <div class="user-main-info" id="main-info-email">
-                                        abood@gmail.com
-                                    </div> -->
-                  <!-- <div class="user-main-info" id="main-info-name">
-                                        Abdulaziz
-                                    </div> -->
-                  <div class="user-main-info text-white" id="main-info-username">
-                    abood1998
-                  </div>
-                </div>
-                <!--Post $ Comments Count-->
-                <div class="col-4 d-flex flex-column justify-content-evenly ">
-                  <div class="number-info text-light">
-                    <span id="posts-count" class="text-info">12</span> Posts
-                  </div>
-                  <div class="number-info text-light">
-                    <span id="comments-count" class="text-info">25</span> Comments
-                  </div>
-                </div>
-              </div>
+             <div class="upper">
 
+               <!-- <img src="./img/4.jpg" class="img-fluid"> -->
+            
+             </div>
+
+             <div class="user text-center">
+
+               <div class="profile">
+
+                 <img src="./img/abdulaziz.JPEG" class="rounded-circle" width="80">
+                 
+               </div>
+
+             </div>
+
+
+             <div class="mt-5 text-center">
+
+               <h4 class="mb-0" id="main-info-username"></h4>
+               <span class="text-muted d-block mb-2">Swedden</span>
+
+               <button class="btn btn-primary btn-sm follow">Follow</button>
+
+
+               <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+                 <div class="stats">
+                   <h6 class="mb-0">Posts</h6>
+                   <span id="posts-count"></span>
+
+                 </div>
+
+
+                 <div class="stats">
+                   <h6 class="mb-0">Comments</h6>
+                   <span id="comments-count"></span>
+
+                 </div>
+
+
+                 <div class="stats">
+                   <h6 class="mb-0">Likes</h6>
+                   <span>129</span>
+
+                 </div>
+                 
+               </div>
+               
+             </div>
+              
             </div>
           </div>
           <!--Main Info-->
