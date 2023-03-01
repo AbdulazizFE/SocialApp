@@ -131,12 +131,12 @@
   <!--Navigation bar container-->
   <div class="container pt-2">
     <div class="d-flex justify-content-center">
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <nav class="navbar navbar-expand-lg bg-dark w-50 ">
         <div class="container-fluid">
           <a class="navbar-brand " id="fe" href="index.html">FE Social</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          <button class="navbar-toggler menuMobil" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-list"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -158,8 +158,9 @@
               </button>
             </div>
             <div class="d-flex w-100 justify-content-end align-items-center" id="logout-div">
-              <img id="nav-user-image" src="./img/user.png" class="rounded-circle" style="width: 40px; height: 40px"
-                alt="" />
+              <span class="userNav">
+                <i class="bi bi-person-fill"></i>
+              </span>
               <b class="px-2" id="nav-username"></b>
               <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2"
                 data-bs-toggle="modal">
@@ -204,16 +205,16 @@
     <div class="container mb-1">
       <!--Users post-->
       <div class="row d-flex justify-content-center">
-        <div class="col-10">
+        <div class="mt-5">
           <h1 class="userPost mt-5" style="color: #fff">
             <span id="username-span" class="currentUserPost"></span>
-            Post <i class="bi bi-newspaper"></i>
+            Post <i class="bi bi-chat-left-text-fill"></i>
           </h1>
         </div>
       </div>
       <!--Post row-->
       <div class="row d-flex justify-content-center">
-        <div class="col-10" id="post"></div>
+        <div class="col-9" id="post"></div>
       </div>
     </div>
   </div>

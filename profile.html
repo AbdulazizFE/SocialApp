@@ -13,6 +13,7 @@
   <script src="./node_modules/axios/dist/axios.min.js"></script>
   <title>FE Social</title>
 </head>
+
 <body class="body">
   <!--Loader start-->
   <div id="loader" class="loaderDiv">
@@ -21,7 +22,7 @@
   <!--Loader end-->
   <!--MODALS-->
   <!--Login modal-->
-  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -52,7 +53,7 @@
     </div>
   </div>
   <!--Register new user modal-->
-  <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -88,7 +89,8 @@
     </div>
   </div>
   <!--Create post modal-->
-  <div class="modal fade" id="createPost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5" id="createPost-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -128,7 +130,8 @@
     </div>
   </div>
   <!--Delete post modal-->
-  <div class="modal fade" id="deletePost-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5" id="deletePost-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -158,14 +161,14 @@
   <!--Alerts-->
   <div id="success-alert" class="show fade"></div>
   <!--Navigation bar container-->
-  <div class="container pt-2">
+  <div class="container  pt-2">
     <div class="d-flex justify-content-center">
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <nav class="navbar navbar-expand-lg bg-dark w-50">
         <div class="container-fluid">
           <a class="navbar-brand " id="fe" href="index.html">FE Social</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          <button class="navbar-toggler menuMobil" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-list"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -188,8 +191,9 @@
             </div>
 
             <div class="d-flex w-100 justify-content-end align-items-center" id="logout-div">
-              <img id="nav-user-image" src="./img/user.png" class="rounded-circle" style="width: 40px; height: 40px"
-                alt="" />
+              <span class="userNav">
+                | <i class="bi bi-person-fill"></i>
+              </span>
               <b class="text-white px-2" id="nav-username"> @Abdulaziz </b>
               <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2"
                 data-bs-toggle="modal">
@@ -201,12 +205,12 @@
       </nav>
     </div>
     <!--Main content-->
-    <div class="container">
-      <h1 class="userProfile pt-5 text-center"><span id="user-profile"></span> Profile</h1>
+    <div class="container  mt-5 pt-5">
+      <h1 class="userProfile  text-center"><span id="user-profile"></span> Profile</h1>
       <div class="d-flex justify-content-center">
         <div class="col-9">
           <!--Main Info-->
-          <div class="card show bg-secondary shadow">
+          <div class="card  show bg-secondary shadow">
             <div class="card-body">
               <div class="row">
                 <!--User image column-->
@@ -229,11 +233,11 @@
                 </div>
                 <!--Post $ Comments Count-->
                 <div class="col-4 d-flex flex-column justify-content-evenly ">
-                  <div class="number-info text-info">
-                    <span id="posts-count">12</span> Posts
+                  <div class="number-info text-light">
+                    <span id="posts-count" class="text-info">12</span> Posts
                   </div>
-                  <div class="number-info text-info">
-                    <span id="comments-count">25</span> Comments
+                  <div class="number-info text-light">
+                    <span id="comments-count" class="text-info">25</span> Comments
                   </div>
                 </div>
               </div>
@@ -242,13 +246,13 @@
           </div>
           <!--Main Info-->
           <!--Posts Title-->
-          <div class="row mt-5 namePosts ">
-            <h1><span id="name-posts"></span> Posts</h1>
+          <div class="row  mt-5 namePosts ">
+            <h1><span id="name-posts"></span> Posts <i class="bi bi-card-text"></i></h1>
           </div>
           <!--Posts Title-->
           <!--Posts-->
           <div class="d-flex justify-content-center">
-            <div class="col-12 mt-5">
+            <div class="col-9 mt-5">
               <div id="user-posts"></div>
             </div>
           </div>
@@ -256,8 +260,7 @@
       </div>
     </div>
   </div>
+  <script src="main.js"></script>
+  <button class="buttonTop" onclick="topClick()"> <i class="bi bi-arrow-up-short"></i></button>
 </body>
-
-<script src="main.js"></script>
-
 </html>

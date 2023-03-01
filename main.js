@@ -63,7 +63,9 @@ function getPosts() {
   axios.get(`${basUrl}/posts`).then((response) => {
     console.log("data", response.data);
     toggleLoader(false);
-    const posts = response.data;
+    // get the last post into the start page 
+    const posts = response.data.sort(function(a,b){ return b.id - a.id});
+   
     for (post of posts) {
       const author = post.author;
       let postTitle = "";
@@ -91,14 +93,14 @@ function getPosts() {
 
       let content = `
        <!--Post-->
- 
-          <div class="card shadow bg-dark styleCard mt-2">
+ <div class="cr" >
+          <div class="card shadow allPosts bg-dark styleCard mt-2" id="card" >
             <div class="card-header" >
          <span class="userstartpage" onclick="userCliked(${author.id})">
          <b class="text-warning"> <i class="bi bi-person-circle"></i>  ${author.userName} </b>
          </span>
          ${editButton}
-            <div class="card-body" >
+            <div class="card-body" onclick="getCurrentPost(${post.id})" >
               <h6 style="color: rgb(141, 139, 139)" class="mt-1">
               🗓️  ${post.created}
               </h6>
@@ -107,13 +109,13 @@ function getPosts() {
                ${post.content}
               </p>
               <hr />
-              <span class="comment text-secondary" onclick="getCurrentPost(${post.id})">
+              <span class="comment text-secondary" >
              <b> <i class="bi bi-pen-fill"></i> Comment (${post.count})</b>
               </span>
             </div>
             </div>
           
-        
+            </div>
        `;
 
       document.getElementById("posts").innerHTML += content;
@@ -137,7 +139,9 @@ function getUser() {
     document.getElementById("posts-count").innerHTML = user.countPost;
     document.getElementById("comments-count").innerHTML = user.countComment;
     document.getElementById("name-posts").innerHTML = user.userName + "'s";
-    const post = response.data.find((x) => x.id).post;
+  // get the last post into the start page 
+    const post = response.data.find((x) => x.id).post.sort(function(a,b){ return b.id - a.id})
+
 
     document.getElementById("user-posts").innerHTML = "";
     for (posts of post) {
@@ -165,7 +169,7 @@ function getUser() {
 
       let content = `
        <!--Post-->
-          <div class="card shadow bg-dark mb-2">
+          <div class="card shadow bg-dark  mb-5">
             <div class="card-header">  
            <span class="userstartpage" >
            <b class = "text-warning"><i class="bi bi-person-circle"></i> ${posts.userName}</b>
@@ -544,6 +548,7 @@ function getPost() {
   //get teh current post
   axios.get(`${basUrl}/posts/${id}`).then((response) => {
     toggleLoader(false);
+      
     const post = response.data[0];
     const comment = post.comment;
     const author = post.author;
@@ -654,3 +659,15 @@ function createCommentClicked() {
     });
 }
 //Post Details End
+
+
+
+
+
+
+
+
+function topClick(){
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
