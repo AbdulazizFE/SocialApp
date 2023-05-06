@@ -56,6 +56,18 @@ function loginBtn() {
     });
 }
 
+
+
+
+//imges handle
+// var loadFile = function(event){
+//   var reader = new FileReader();
+//   reader.onload = function(){
+//     var myImg = document.getElementById("myImg")
+//     myImg.src = reader.result;
+//   }
+//   reader.readAsDataURL(event.target.files[0])
+// }
 //get all posts
 function getPosts() {
   toggleLoader(true);
@@ -63,11 +75,14 @@ function getPosts() {
   axios.get(`${basUrl}/posts`).then((response) => {
     console.log("data", response.data);
     toggleLoader(false);
-    // get the last post into the start page 
-    const posts = response.data.sort(function(a,b){ return b.id - a.id});
-   
+    // get the last post into the start page
+    const posts = response.data.sort(function (a, b) {
+      return b.id - a.id;
+    });
     for (post of posts) {
+
       const author = post.author;
+      const like = post.like;
       let postTitle = "";
       //show or hide (edit) button
       //Chcek if user is logged in or not
@@ -87,6 +102,12 @@ function getPosts() {
  `;
       }
 
+      if (like != null) {
+        like = `    <span class="likeActive text-secondary" >
+  <b><i class="bi bi-hand-thumbs-up-fill"></i> Like</b>
+   </span>`;
+      }
+
       if (post.title != null) {
         postTitle = post.title;
       }
@@ -100,7 +121,7 @@ function getPosts() {
          <b class="text-warning"> <i class="bi bi-person-circle"></i>  ${author.userName} </b>
          </span>
          ${editButton}
-            <div class="card-body" onclick="getCurrentPost(${post.id})" >
+            <div class="card-body" >
               <h6 style="color: rgb(141, 139, 139)" class="mt-1">
               🗓️  ${post.created}
               </h6>
@@ -109,9 +130,15 @@ function getPosts() {
                ${post.content}
               </p>
               <hr />
-              <span class="comment text-secondary" >
+              <span class="like text-secondary" >
+              <b><i class="bi bi-hand-thumbs-up-fill"></i> Like (${post.likes})</b>
+               </span>
+              <span class="comment text-secondary" onclick="getCurrentPost(${post.id})">
              <b> <i class="bi bi-pen-fill"></i> Comment (${post.count})</b>
               </span>
+            
+ 
+
             </div>
             </div>
           
@@ -119,7 +146,12 @@ function getPosts() {
        `;
 
       document.getElementById("posts").innerHTML += content;
+
     }
+
+
+
+
   });
 }
 
@@ -131,17 +163,21 @@ function getUser() {
   const id = getCurrenUser();
   axios.get(`${basUrl}/Auth/${id}`).then((response) => {
     console.log("user info", response.data);
-  
+
     const user = response.data[0];
     // document.getElementById("user-profile").innerHTML = user.username;
     document.getElementById("user-profile").innerHTML = user.userName + "'s";
     document.getElementById("main-info-username").innerHTML = user.userName;
     document.getElementById("posts-count").innerHTML = user.countPost;
     document.getElementById("comments-count").innerHTML = user.countComment;
+    document.getElementById("likes-count").innerHTML = user.countLikes;
     document.getElementById("name-posts").innerHTML = user.userName + "'s";
-  // get the last post into the start page 
-    const post = response.data.find((x) => x.id).post.sort(function(a,b){ return b.id - a.id})
-
+    // get the last post into the start page
+    const post = response.data
+      .find((x) => x.id)
+      .post.sort(function (a, b) {
+        return b.id - a.id;
+      });
 
     document.getElementById("user-posts").innerHTML = "";
     for (posts of post) {
@@ -548,7 +584,7 @@ function getPost() {
   //get teh current post
   axios.get(`${basUrl}/posts/${id}`).then((response) => {
     toggleLoader(false);
-      
+
     const post = response.data[0];
     const comment = post.comment;
     const author = post.author;
@@ -660,14 +696,7 @@ function createCommentClicked() {
 }
 //Post Details End
 
-
-
-
-
-
-
-
-function topClick(){
+function topClick() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }

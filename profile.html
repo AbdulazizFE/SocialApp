@@ -163,7 +163,7 @@
   <!--Navigation bar container-->
   <div class="container  pt-2">
     <div class="d-flex justify-content-center">
-      <nav class="navbar navbar-expand-lg bg-dark w-75">
+      <nav class="navbar navbar-expand-lg fixed-top w-100">
         <div class="container-fluid">
           <a class="navbar-brand " id="fe" href="index.html">FE Social</a>
           <button class="navbar-toggler menuMobil" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -206,13 +206,13 @@
     </div>
     <!--Main content-->
     <div class="container">
-      <h1 class="userProfile  text-center"><span id="user-profile"></span> Profile</h1>
+      <h1 class="userProfile   text-center"><span id="user-profile"></span> Profile</h1>
       <div class="d-flex justify-content-center">
         <div class="col-9">
           <!--Main Info-->
           <div class="container d-flex justify-content-center align-items-center">
              
-            <div class="cardUser">
+            <div class="cardUser ">
 
              <div class="upper">
 
@@ -231,9 +231,9 @@
              </div>
 
 
-             <div class="mt-5 text-center">
+             <div class="mt-2 text-center">
 
-               <h4 class="mb-0" id="main-info-username"></h4>
+               <h4  id="main-info-username"></h4>
                <span class="text-muted d-block mb-2">Swedden</span>
 
                <button class="btn btn-primary btn-sm follow">Follow</button>
@@ -242,22 +242,22 @@
                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
 
                  <div class="stats">
-                   <h6 class="mb-0">Posts</h6>
+                   <h6 class="mb-0"><i class="bi bi-card-text"></i> Posts</h6>
                    <span id="posts-count"></span>
 
                  </div>
 
 
                  <div class="stats">
-                   <h6 class="mb-0">Comments</h6>
+                   <h6 class="mb-0 text-secondary font-weight-bold"><i class="bi bi-pencil-fill"></i> Comments</h6>
                    <span id="comments-count"></span>
 
                  </div>
 
 
-                 <div class="stats">
-                   <h6 class="mb-0">Likes</h6>
-                   <span>129</span>
+                 <div class="stats likes">
+                   <h6 class="mb-0 text-primary"><i class="bi bi-hand-thumbs-up-fill"></i> Likes</h6>
+                   <span id="likes-count"></span>
 
                  </div>
                  
@@ -283,7 +283,7 @@
       </div>
     </div>
   </div>
-  <script src="main.js"></script>
   <button class="buttonTop" onclick="topClick()"> <i class="bi bi-arrow-up-short"></i></button>
+  <script src="main.js"></script>
 </body>
 </html>

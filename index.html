@@ -91,7 +91,7 @@
   <!--Navigation bar container-->
   <div class="container pt-2">
     <div class="d-flex justify-content-center">
-      <nav class="navbar navbar-expand-lg bg-dark w-75">
+      <nav class="navbar navbar-expand-lg fixed-top  w-100">
         <div class="container-fluid">
           <a class="navbar-brand" id="fe" href="index.html">FE Social</a>
           <button class="navbar-toggler menuMobil" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -147,6 +147,12 @@
           </div>
           <div class="modal-body">
             <form>
+
+              <!-- <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Image</label>
+                <input type="file" class="image" id="image" onchange="loadFile(event)"/>
+                <img id="myImg" height="100px"/>
+              </div> -->
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Title</label>
                 <input type="text" class="form-control" id="title" />
